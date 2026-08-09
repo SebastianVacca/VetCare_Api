@@ -42,14 +42,8 @@ public class MascotaServiceImpl implements MascotaService {
     public MascotaResponse crear(MascotaRequest request) {
         Dueno dueno = duenoRepository.findById(request.duenoId())
                 .orElseThrow(() -> new RecursoNoEncontradoException("No se encontró un dueño con id: " + request.duenoId()));
-        Mascota mascota = toEntity(request, dueno);
-//        Mascota mascota = new Mascota();
-//        mascota.setNombre(request.nombre());
-//        mascota.setEspecie(request.especie());
-//        mascota.setRaza(request.raza());
-//        mascota.setEdad(request.edad());
-//        mascota.setDueno(dueno);
 
+        Mascota mascota = toEntity(request, dueno);
         Mascota guardada = mascotaRepository.save(mascota);
         return toResponse(guardada);
     }
